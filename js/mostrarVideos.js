@@ -5,7 +5,8 @@ import { conexionAPI } from "./conexionAPI.js";
 const lista = document.querySelector("[data-lista]")
 
 // Función para crear una tarjeta de video (card)
-function crearCard(titulo, descripcion, url, imagem) {
+// exportamos la funcion para reutilizarla en filtrarVideo
+export default function crearCard(titulo, descripcion, url, imagem) {
     // Crea un nuevo elemento `li` para la tarjeta de video
     const video = document.createElement("li");
     // Asigna una clase CSS al elemento `li`
