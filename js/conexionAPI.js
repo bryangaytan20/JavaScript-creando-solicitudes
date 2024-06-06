@@ -32,7 +32,8 @@ async function enviarVideo(titulo, descripcion, url, imagem) {
     // Convierte la respuesta de la solicitud en un objeto JSON
     const conexionConvertida = await conexion.json();
 
-    if(!conexion.ok){
+    // Verifica si la solicitud fue exitosa; si no, lanza un error
+    if (!conexion.ok) {
         throw new Error("Ha ocurrido un error al enviar el video");
     }
 
@@ -40,19 +41,25 @@ async function enviarVideo(titulo, descripcion, url, imagem) {
     return conexionConvertida;
 }
 
-async function buscarVideos(palabraClave){
+// Función asincrónica para buscar videos por palabra clave
+async function buscarVideos(palabraClave) {
+    // Realiza una solicitud GET a la URL especificada con la palabra clave para buscar videos
     const conexion = await fetch(`http://localhost:3001/videos?q=${palabraClave}`);
-    const conexionConvertida = conexion.json();
-    return conexionConvertida;
+    
+    // Convierte la respuesta de la solicitud en un objeto JSON
+    const conexionConvertida = await conexion.json();
 
+    // Retorna la respuesta convertida
+    return conexionConvertida;
 }
 
-// Exporta un objeto 'conexionAPI' con las funciones 'listarVideos' y 'enviarVideo'
+// Exporta un objeto 'conexionAPI' con las funciones 'listarVideos', 'enviarVideo' y 'buscarVideos'
 export const conexionAPI = {
     listarVideos,
     enviarVideo,
     buscarVideos
 };
+
 
 
 // listarVideos();

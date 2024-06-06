@@ -2,10 +2,10 @@
 import { conexionAPI } from "./conexionAPI.js";
 
 // Selecciona el elemento HTML con el atributo `data-lista`
-const lista = document.querySelector("[data-lista]")
+const lista = document.querySelector("[data-lista]");
 
 // Función para crear una tarjeta de video (card)
-// exportamos la funcion para reutilizarla en filtrarVideo
+// Exportamos la función para reutilizarla en otros módulos, como `filtrarVideo`
 export default function crearCard(titulo, descripcion, url, imagem) {
     // Crea un nuevo elemento `li` para la tarjeta de video
     const video = document.createElement("li");
@@ -30,21 +30,20 @@ export default function crearCard(titulo, descripcion, url, imagem) {
 }
 
 // Función asincrónica para listar videos
-async function listarVideos(){
-    try{
+async function listarVideos() {
+    try {
         // Obtiene la lista de videos desde la API
         const listaAPI = await conexionAPI.listarVideos();
-            
+        
         // Recorre cada video de la lista y añade una tarjeta de video a la lista HTML
         listaAPI.forEach(video => lista.appendChild(crearCard(video.titulo, video.descripcion, video.url, video.imagem)));
-
-    }catch{
-        lista.innerHTML='<h2 class="mensaje__titulo">Ha ocurrido un problema con la conexion :( </h2>'
+    } catch {
+        // Si ocurre un error en la conexión, muestra un mensaje de error
+        lista.innerHTML = '<h2 class="mensaje__titulo">Ha ocurrido un problema con la conexión :(</h2>';
     }
-
-    
 }
 
 // Llama a la función para listar los videos al cargar el script
 listarVideos();
+
 
