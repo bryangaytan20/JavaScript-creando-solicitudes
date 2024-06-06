@@ -30,12 +30,19 @@ export default function crearCard(titulo, descripcion, url, imagem) {
 }
 
 // Función asincrónica para listar videos
-async function listarVideos() {
-    // Obtiene la lista de videos desde la API
-    const listaAPI = await conexionAPI.listarVideos();
+async function listarVideos(){
+    try{
+        // Obtiene la lista de videos desde la API
+        const listaAPI = await conexionAPI.listarVideos();
+            
+        // Recorre cada video de la lista y añade una tarjeta de video a la lista HTML
+        listaAPI.forEach(video => lista.appendChild(crearCard(video.titulo, video.descripcion, video.url, video.imagem)));
+
+    }catch{
+        lista.innerHTML='<h2 class="mensaje__titulo">Ha ocurrido un problema con la conexion :( </h2>'
+    }
+
     
-    // Recorre cada video de la lista y añade una tarjeta de video a la lista HTML
-    listaAPI.forEach(video => lista.appendChild(crearCard(video.titulo, video.descripcion, video.url, video.imagem)));
 }
 
 // Llama a la función para listar los videos al cargar el script

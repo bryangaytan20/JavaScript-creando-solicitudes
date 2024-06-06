@@ -32,6 +32,10 @@ async function enviarVideo(titulo, descripcion, url, imagem) {
     // Convierte la respuesta de la solicitud en un objeto JSON
     const conexionConvertida = await conexion.json();
 
+    if(!conexion.ok){
+        throw new Error("Ha ocurrido un error al enviar el video");
+    }
+
     // Retorna la respuesta convertida
     return conexionConvertida;
 }
